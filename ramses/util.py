@@ -1,3 +1,5 @@
+from pathlib import Path
+
 def leeList (fitLis): 
     # with apertura [as objeto]
     # No siempre apertura saca un objeto. Utilizaremos pytorch 
@@ -8,4 +10,9 @@ def leeList (fitLis):
         for linea in fpLis: 
             lista.append(linea.strip())
     return lista
+
+def pathName(dir, name: str, ext):
+    if ext[0] != '.': ext = f".{ext}"
+    if name.startswith(dir): name = name[len(dir)+1:]
+    return Path(dir).joinpath(name).with_suffix(ext)
  
