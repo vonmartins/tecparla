@@ -1,5 +1,6 @@
 import re
 
+<<<<<<< HEAD
 # reLBO = r"LBO:(\s*\d*\s*,){3}(?P<trn>\w+)"
 reLBO = re.compile(r'LBO:(\s*\d*[.]?\d*,){3}(?P<trn>\w+)') # LBO -> Contenido ortográfico
 
@@ -16,3 +17,15 @@ def cogeTrn(ficMar):
             if (match := reLBO.match(linea)):
                 return match['trn']
             # if (lbo := reLBO.match(linea)): return lbo['trn']
+=======
+def cogeTrn(ficMar):
+    """
+    Devuelve el contenido del cuarto campo de la primera etiqueta LBO presente en el
+    fichero de Marcas 'ficMar'.
+    """
+    reLBO = re.compile(r'LBO:(\s*\d*[.]?\d*,){3}(?P<trn>\w+)')
+    with open(ficMar) as fpMar:
+        for linea in fpMar:
+            if (lbo := reLBO.match(linea)): return lbo['trn']
+
+>>>>>>> b00980758d855a677fc473febde7e6d7d3e4f0f7
