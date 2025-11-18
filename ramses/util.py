@@ -2,7 +2,7 @@ from pathlib import Path
 
 def pathName(dir, name: str, ext):
     '''
-        Te retorna una cadena de Strings con el nombre del path
+        Te devuelve una cadena de Strings con el nombre del path
     '''
     # se puede hacer también con 
     # return dir + '/' + name + '.' + ext
@@ -26,3 +26,10 @@ def leeLis(*ficLis):
         with open(fichero, 'rt') as fpLis:
             lista += [pal for linea in fpLis for pal in linea.split()]
     return lista
+
+
+def chkPathName(pathName):
+    """ 
+    Crea el directorio del fichero 'pathName' si es necesario
+    """
+    Path(pathName).parent.mkdir(parents=True, exist_ok=True)
