@@ -32,4 +32,12 @@ def evalua(dirRec, dirMar, *guiSen):
                 conf = 0
             print(f'\t{conf}',end='')
         print()
-        
+
+    total = corr = 0
+    for mar in lisPal: 
+        for rec in lisPal:
+            total += matCnf[mar][rec]
+            if mar == rec: 
+                corr += matCnf[mar][rec]
+    print(f'exact = {corr/total:.2%}')
+
