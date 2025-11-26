@@ -26,3 +26,11 @@ def leeLis(*ficLis):
         with open(fichero, 'rt') as fpLis:
             lista += [pal for linea in fpLis for pal in linea.split()]
     return lista
+
+
+def chkPathName(pathName):
+    """
+    Crea el directorio del fichero 'PathName' si es necesario
+    """
+    Path(pathName).parent.mkdir(parents=True, exist_ok=True)
+
