@@ -28,9 +28,10 @@ def leeLis(*ficLis):
     return lista
 
 
-def chkPathName(pathName):
+def chkPathName(pathName): 
     """
-    Crea el directorio del fichero 'PathName' si es necesario
+    Crea el directorio del fichero 'pathName' si es necesario
     """
-    Path(pathName).parent.mkdir(parents=True, exist_ok=True)
+    Path(pathName).parent.mkdir(parents=True , exist_ok=True)
 
+    

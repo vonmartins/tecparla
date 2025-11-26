@@ -1,18 +1,21 @@
-from ramses.util import *
-from ramses.mar import *
+#! /usr/bin/env python3
+
+from ramses.util import * 
+from ramses.mar import * 
 
 def evalua(dirRec, dirMar, *guiSen):
+    """
+    Calcula la tasa de exactitud en el reconocimiento 
+    """
     matCnf = {}
     lisPal = set()
-
     for sen in leeLis(*guiSen):
-        pathRec = pathName(dirRec, sen, "rec")
+        pathRec = pathName(dirRec, sen, '.rec')
         rec = cogeTrn(pathRec)
-        pathMar = pathName(dirMar, sen, "mar")
+        pathMar = pathName(dirMar, sen, '.mar')
         mar = cogeTrn(pathMar)
-
         if not mar in matCnf:
-            matCnf[mar] = {rec:1}
+            matCnf[mar] = {rec: 1}
         elif not rec in matCnf[mar]:
             matCnf[mar][rec] = 1
         else:
@@ -23,13 +26,13 @@ def evalua(dirRec, dirMar, *guiSen):
         print(f'\t{rec}', end='')
     print()
     for mar in sorted(lisPal):
-        print(f'{mar}', end='')
+        print(f'{mar}',end='')
         for rec in sorted(lisPal):
             if mar in matCnf and rec in matCnf[mar]:
                 conf = matCnf[mar][rec]
-            else :
+            else : 
                 conf = 0
-            print(f'\t{conf}', end='')
+            print(f'\t{conf}',end='')
         print()
 
     total = cor = 0
@@ -38,7 +41,4 @@ def evalua(dirRec, dirMar, *guiSen):
             total += matCnf[mar][rec]
             if mar == rec:
                 cor += matCnf[mar][rec]
-    print(f'exact = {cor/total :.2%}')
-
-    
-
+    print(f'exact = {cor/total}')
