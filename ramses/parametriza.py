@@ -2,9 +2,10 @@
 
 import soundfile as sf
 import numpy as np 
-from tqdm import tqdm
+
 from ramses.util import * 
 from ramses.prm import *
+from tqdm import tqdm
 
 def parametriza(dirPrm, dirSen, *guiSen):
     """
@@ -22,23 +23,26 @@ def parametriza(dirPrm, dirSen, *guiSen):
         chkPathName(pathPrm)
         escrPrm(pathPrm, prm)
 
-if __name__ == "__main__": 
+if __name__ == "__main__":
     from docopt import docopt
+    import sys
 
-    usage= """
-        Parametriza una base de datos de señales de voz.
+    usage=f"""
+        Parametriza una bases de datos de señales de voz
 
-        usage: 
-            parametriza.py [options] <guia> ...
-            parametriza.py -h | --help 
-            parametriza.py --version
+        usage:
+            {sys.argv[0]} [options] <guia> ...
+            {sys.argv[0]} -h | --help
+            {sys.argv[0]} --version
 
-        options: 
-            -s DIRECTORI, --dirSen DIRECTORI  directori de la señal d'entrada [default: .]
-            -p DIRECTORI, --dirPrm DIRECTORI  directori de la señal parametritzada [default: .]
-        """ 
-    args= docopt(usage, version= "tecparla2025") # diccionario
+        options:
+            -s, --dirSen  DIRECTORI  directori de la señal d' entrada [default: .]
+            -p, --dirPrm  DIRECTORI  directori de la señal parametrizada [default: .]
+        """
+    args= docopt(usage, version="tecparla2025")
     dirSen = args["--dirSen"]
     dirPrm = args["--dirPrm"]
-    guiSen = args["<guia>"] # lista de cadenas
-    parametriza(dirPrm, dirSen, *guiSen) 
+    guiSen = args["<guia>"]
+    parametriza(dirPrm, dirSen, *guiSen)
+
+ 

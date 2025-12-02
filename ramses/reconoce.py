@@ -1,9 +1,10 @@
 #! /usr/bin/env python3
 
 import numpy as np
-from tqdm import tqdm
+
 from ramses.util import * 
 from ramses.prm import * 
+from tqdm import tqdm
 
 def reconoce(dirRec, dirPrm, ficMod, *guiSen):
     """
@@ -26,3 +27,28 @@ def reconoce(dirRec, dirPrm, ficMod, *guiSen):
         chkPathName(pathRec)
         with open(pathRec, 'wt') as fpRec: 
             fpRec.write(f'LBO:,,,{reconocida}\n')      
+
+if __name__ == "__main__":
+    from docopt import docopt
+    import sys
+
+    usage=f"""
+        Reconoce una bases de datos de señales de voz
+
+        usage:
+            {sys.argv[0]} [options] <guia> ...
+            {sys.argv[0]} -h | --help
+            {sys.argv[0]} --version
+
+        options:
+            -r, --dirRec DIRECTORI  directori de la señal reconeguda [default: .]
+            -p, --dirPrm PATH  Directorio con las señales parametrizadas [default: .]
+            -m, --ficMod FILE  directori amb els continguts acústics [default: .]
+        """
+    args= docopt(usage, version="tecparla2025")
+    dirRec = args["--dirRec"]
+    dirPrm = args["--dirPrm"]
+    ficMod = args["--ficMod"]
+    guiSen = args["<guia>"]
+
+    reconoce(dirRec, dirPrm, ficMod, *guiSen)

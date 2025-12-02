@@ -2,6 +2,7 @@
 
 from ramses.util import * 
 from ramses.mar import * 
+from tqdm import tqdm
 
 def evalua(dirRec, dirMar, *guiSen):
     """
@@ -9,7 +10,7 @@ def evalua(dirRec, dirMar, *guiSen):
     """
     matCnf = {}
     lisPal = set()
-    for sen in leeLis(*guiSen):
+    for sen in tqdm(leeLis(*guiSen), ascii="·|/-\\#"):
         pathRec = pathName(dirRec, sen, '.rec')
         rec = cogeTrn(pathRec)
         pathMar = pathName(dirMar, sen, '.mar')
@@ -36,9 +37,33 @@ def evalua(dirRec, dirMar, *guiSen):
         print()
 
     total = cor = 0
-    for mar in lisPal: 
+    for mar in lisPal:
         for rec in lisPal:
             total += matCnf[mar][rec]
-            if mar == rec: 
+            if mar == rec:
                 cor += matCnf[mar][rec]
-    print(f'exact = {cor/total:2%}')
+    print(f'exact = {cor/total:.2%}')
+
+if __name__ == "__main__":
+    from docopt import docopt
+    import sys
+
+    usage=f"""
+Evalua 
+
+usage: 
+    {sys.argv[0]} [options] <guia> ...
+    {sys.argv[0]} -h | --help
+    {sys.argv[0]} --version
+
+options: 
+    -r, --dirRec PATH  Directorio con las señales reconocidas [default: .]
+    -m, --dirMar PATH  Directorio con el contenido fonético de las señales [default: .]
+"""
+    
+    args = docopt(usage, version="tecparla2025")
+    dirRec = args["--dirRec"]
+    dirMar = args["--dirMar"]
+    guiSen = args["<guia>"]
+
+    evalua(dirRec, dirMar, *guiSen)
