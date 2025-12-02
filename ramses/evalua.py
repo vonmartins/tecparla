@@ -10,7 +10,7 @@ def evalua(dirRec, dirMar, *guiSen):
     """
     matCnf = {}
     lisPal = set()
-    for sen in tqdm(leeLis(*guiSen), ascii="·|/-\\#"):
+    for sen in tqdm(leeLis(*guiSen)):
         pathRec = pathName(dirRec, sen, '.rec')
         rec = cogeTrn(pathRec)
         pathMar = pathName(dirMar, sen, '.mar')
@@ -49,21 +49,26 @@ if __name__ == "__main__":
     import sys
 
     usage=f"""
-Evalua 
 
-usage: 
+
+usage:
     {sys.argv[0]} [options] <guia> ...
     {sys.argv[0]} -h | --help
     {sys.argv[0]} --version
 
-options: 
-    -r, --dirRec PATH  Directorio con las señales reconocidas [default: .]
-    -m, --dirMar PATH  Directorio con el contenido fonético de las señales [default: .]
+options:
+    -r, --dirRec PATH  Directorio con los ficheros del resultado [default: .]
+    -m, --dirMar PATH  Directorio con el contenido del fonético de las señales [default: .]
 """
     
     args = docopt(usage, version="tecparla2025")
     dirRec = args["--dirRec"]
     dirMar = args["--dirMar"]
     guiSen = args["<guia>"]
-
     evalua(dirRec, dirMar, *guiSen)
+
+    
+
+
+
+

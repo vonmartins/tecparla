@@ -21,7 +21,7 @@ def entrena(dirPrm, dirMar, lisUni, ficMod, *ficGui):
     numUni = {unidad : 0 for unidad in unidades}
 
     # Bucle para todas las señales de entrenamiento 
-    for señal in tqdm(leeLis(*ficGui), ascii="·|/-\\#"): 
+    for señal in tqdm(leeLis(*ficGui)): 
         # leemos la señal y el contenido del fichero de marcas
         pathPrm = pathName(dirPrm, señal, 'prm')
         prm = leePrm(pathPrm)
@@ -46,18 +46,18 @@ if __name__ == "__main__":
     import sys
 
     usage=f"""
-Entrena un modelo acústico para el reconocimiento de las vocales
+Entrena un modelo acústico para el reconocimento de las vocales
 
-usage: 
+usage:
     {sys.argv[0]} [options] <guia> ...
     {sys.argv[0]} -h | --help
     {sys.argv[0]} --version
 
-options: 
+options:
     -p, --dirPrm PATH  Directorio con las señales parametrizadas [default: .]
-    -m, --dirMar PATH  Directorio con el contenido fonético de las señales [default: .]
-    -l, --lisUni PATH  Fichero con la lista de unidades fonéticas [default: Lis/vocales.lis]
-    -M, --ficMod PATH  Fichero con el modelo resultante: [default: Mod/vocales.mod]
+    -m, --dirMar PATH  Directorio con el contenido del fonético de las señales [default: .]
+    -l, --lisUni PATH  Fichero con la lista de unidades fométicas [default: Lis/vocales.lis]
+    -M, --ficMod PATH  Fichero con el modelo resultante [default: Mod/vocales.mod]
 """
     
     args = docopt(usage, version="tecparla2025")
@@ -66,7 +66,7 @@ options:
     lisUni = args["--lisUni"]
     ficMod = args["--ficMod"]
     ficGui = args["<guia>"]
-
     entrena(dirPrm, dirMar, lisUni, ficMod, *ficGui)
+
 
 

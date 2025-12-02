@@ -13,7 +13,7 @@ def parametriza(dirPrm, dirSen, *guiSen):
     parametrizada en el directorio 'dirPrm'.
     En la versión trivial, la señal parametrizada es igual a la señal temporal.
     """
-    for nomSen in tqdm(leeLis(*guiSen), ascii="·|/-\\#"):
+    for nomSen in tqdm(leeLis(*guiSen), ascii="·|-#"):
         pathSen = pathName(dirSen, nomSen, "wav")
         sen, fm = sf.read(pathSen)
 
