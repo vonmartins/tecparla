@@ -1,21 +1,28 @@
-import numpy as np
+#! /usr/bin/env python3
 
-from util import *
-from prm import *
+import numpy as np
+from tqdm import tqdm
+from ramses.util import * 
+from ramses.prm import * 
 
 def reconoce(dirRec, dirPrm, ficMod, *guiSen):
+    """
+    Reconoce la unidad cuyo modelo se ajusta mejor
+    """
     modelos = np.load(ficMod, allow_pickle=True).item()
 
-    for señal in leeLis(*guiSen):
+    for señal in tqdm(leeLis(*guiSen), ascii="·|/-\\#"):
         pathPrm = pathName(dirPrm, señal, 'prm')
         prm = leePrm(pathPrm)
-        minDis = np.inf
+
+        minDist = np.inf 
         for modelo in modelos:
-            distancia = sum(abs(prm - modelos[modelo])**2)
-            if distancia < minDis:
-                minDis = distancia
-                reconocida = modelo
-        pathRec = pathName(dirRec, señal, 'rec')
+            distancia = sum(abs(prm -modelos[modelo])**2)
+            if distancia < minDist:
+                minDist = distancia
+                reconocida = modelo 
+
+        pathRec = pathName(dirRec, señal, '.rec')
         chkPathName(pathRec)
-        with open(pathRec, "wt") as fpRec:
-            fpRec.write(f'LBO: ,,,{reconocida}')
+        with open(pathRec, 'wt') as fpRec: 
+            fpRec.write(f'LBO:,,,{reconocida}\n')      
