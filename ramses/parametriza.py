@@ -13,7 +13,7 @@ def parametriza(dirPrm, dirSen, *guiSen):
     parametrizada en el directorio 'dirPrm'.
     En la versión trivial, la señal parametrizada es igual a la señal temporal.
     """
-    for nomSen in tqdm(leeLis(*guiSen)):
+    for nomSen in tqdm(leeLis(*guiSen), ascii="·|-#"):
         pathSen = pathName(dirSen, nomSen, "wav")
         sen, fm = sf.read(pathSen)
 
@@ -25,14 +25,15 @@ def parametriza(dirPrm, dirSen, *guiSen):
 
 if __name__ == "__main__":
     from docopt import docopt
+    import sys
 
-    usage="""
+    usage=f"""
         Parametriza una bases de datos de señales de voz
 
         usage:
-            parametriza.py [options] <guia> ...
-            parametriza.py -h | --help
-            parametriza.py --version
+            {sys.argv[0]} [options] <guia> ...
+            {sys.argv[0]} -h | --help
+            {sys.argv[0]} --version
 
         options:
             -s, --dirSen DIRECTORI  directori de la señal d' entrada [default: .]
